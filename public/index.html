@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fatos de Fortuna | Histórias contadas pelo lado do dinheiro</title>
+<meta name="description" content="Histórias de empresas, do Brasil e do mundo, contadas pelo lado do dinheiro. Vídeos curtos novos toda semana.">
+<meta property="og:title" content="Fatos de Fortuna">
+<meta property="og:description" content="Histórias contadas pelo lado do dinheiro.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/capas/01-coca-cola.jpg">
+<meta name="theme-color" content="#0B1524">
+<link rel="icon" href="/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0B1524;--bg2:#111E33;--card:#14223A;--ink:#F3E9D2;--muted:#A9B3C4;--gold:#D9A941;--gold2:#F2C14E;--line:rgba(243,233,210,.12)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:0;z-index:20;background:rgba(11,21,36,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+header img{height:46px;width:auto;display:block}
+nav{display:flex;gap:8px}
+.soc{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);transition:.2s}
+.soc:hover{border-color:var(--gold);color:var(--gold2)}
+.soc svg{width:18px;height:18px;fill:currentColor}
+.hero{padding:64px 0 40px;display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.kicker{color:var(--gold2);font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px}
+h1{font-family:"Playfair Display",serif;font-weight:900;font-size:clamp(36px,5.4vw,64px);line-height:1.05;margin:14px 0 18px}
+h1 em{color:var(--gold);font-style:italic}
+.hero p{color:var(--muted);font-size:18px;max-width:520px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:700;font-size:15px;transition:.2s;cursor:pointer;border:0;font-family:inherit}
+.btn.gold{background:linear-gradient(135deg,#F6DF9A,#D9A941 55%,#9C6B1E);color:#0B1524}
+.btn.gold:hover{filter:brightness(1.08)}
+.btn.ghost{border:1px solid var(--line);color:var(--ink);background:transparent}
+.btn.ghost:hover{border-color:var(--gold)}
+.feat{position:relative;justify-self:center;width:min(320px,100%);aspect-ratio:9/16;border-radius:22px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 0 1px var(--line);cursor:pointer}
+.feat img{width:100%;height:100%;object-fit:cover;display:block}
+.badge{position:absolute;top:14px;left:14px;background:var(--gold2);color:#0B1524;font-weight:700;font-size:12px;padding:5px 10px;border-radius:999px;letter-spacing:.04em}
+.play{position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.55));transition:.2s}
+.play span{width:64px;height:64px;border-radius:50%;background:rgba(11,21,36,.7);border:2px solid var(--gold2);display:grid;place-items:center;transition:.2s}
+.play span::after{content:"";border-left:20px solid var(--gold2);border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px}
+.feat:hover .play span,.card:hover .play span{transform:scale(1.1);background:rgba(11,21,36,.9)}
+section.list{padding:30px 0 70px}
+.listhead{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+h2{font-family:"Playfair Display",serif;font-size:32px}
+.filters{display:flex;gap:8px;flex-wrap:wrap}
+.filters button{background:transparent;color:var(--muted);border:1px solid var(--line);padding:7px 14px;border-radius:999px;font:500 14px Inter,sans-serif;cursor:pointer}
+.filters button.on{color:#0B1524;background:var(--gold);border-color:var(--gold)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:22px}
+.card{cursor:pointer}
+.thumb{position:relative;aspect-ratio:9/16;border-radius:16px;overflow:hidden;background:var(--card);box-shadow:0 0 0 1px var(--line)}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.card:hover .thumb img{transform:scale(1.04)}
+.thumb .play span{width:52px;height:52px}
+.thumb .play span::after{border-left-width:16px;border-top-width:10px;border-bottom-width:10px}
+.dur{position:absolute;right:10px;bottom:10px;background:rgba(0,0,0,.7);font-size:12px;font-weight:700;padding:2px 8px;border-radius:6px}
+.meta{padding:12px 2px 0}
+.meta .tag{color:var(--gold2);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em}
+.meta h3{font-size:16px;line-height:1.3;margin:4px 0 4px}
+.meta time{color:var(--muted);font-size:13px}
+.next{margin-top:34px;padding:18px 22px;border:1px dashed rgba(217,169,65,.45);border-radius:16px;color:var(--muted);display:flex;gap:12px;align-items:center}
+.next b{color:var(--ink)}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--gold2);box-shadow:0 0 0 0 rgba(242,193,78,.6);animation:pulse 1.8s infinite;flex:none}
+@keyframes pulse{70%{box-shadow:0 0 0 12px rgba(242,193,78,0)}100%{box-shadow:0 0 0 0 rgba(242,193,78,0)}}
+.about{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:56px 0}
+.about .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.about h4{font-family:"Playfair Display",serif;font-size:22px;margin-bottom:6px;color:var(--gold2)}
+.about p{color:var(--muted)}
+footer{padding:36px 0 48px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+/* modal */
+.modal{position:fixed;inset:0;z-index:50;background:rgba(5,10,18,.92);display:none;align-items:center;justify-content:center;padding:16px}
+.modal.open{display:flex}
+.mbox{display:flex;gap:28px;align-items:center;max-width:860px;width:100%}
+.mbox video{height:min(82vh,760px);aspect-ratio:9/16;max-width:100%;border-radius:18px;background:#000;box-shadow:0 0 0 1px var(--line)}
+.minfo{flex:1;min-width:0}
+.minfo h3{font-family:"Playfair Display",serif;font-size:28px;line-height:1.15;margin:8px 0 10px}
+.minfo p{color:var(--muted)}
+.mlinks{display:flex;flex-direction:column;gap:10px;margin-top:22px}
+.mlinks a{display:flex;align-items:center;gap:10px;padding:11px 16px;border:1px solid var(--line);border-radius:12px;font-weight:500}
+.mlinks a:hover{border-color:var(--gold)}
+.mlinks svg{width:18px;height:18px;fill:currentColor}
+.close{position:absolute;top:16px;right:20px;background:none;border:0;color:var(--ink);font-size:34px;cursor:pointer;line-height:1}
+@media (max-width:820px){
+ .hero{grid-template-columns:1fr;padding:36px 0 20px;gap:30px;text-align:center}
+ .hero p{margin:0 auto}.cta{justify-content:center}
+ .about .wrap{grid-template-columns:1fr}
+ .mbox{flex-direction:column;gap:14px}
+ .mbox video{height:auto;width:min(100%,calc(70vh*9/16))}
+ .minfo{text-align:center}.minfo h3{font-size:20px}.minfo p{display:none}
+ .mlinks{flex-direction:row;justify-content:center;margin-top:12px}
+ .mlinks a span{display:none}
+ header img{height:44px}
+}
+@media (max-width:480px){.grid{grid-template-columns:repeat(2,1fr);gap:14px}.meta h3{font-size:14px}h2{font-size:26px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+ <a href="/" aria-label="Fatos de Fortuna"><img src="/logo.svg" alt="Fatos de Fortuna"></a>
+ <nav id="nav"></nav>
+</div></header>
+
+<main>
+ <div class="wrap hero">
+  <div>
+   <div class="kicker">Histórias pelo lado do dinheiro</div>
+   <h1>Por trás de toda história, <em>tem uma conta.</em></h1>
+   <p>Empresas que nasceram do nada, planos que deram errado, fortunas que sumiram. Vídeos curtos sobre o Brasil e o mundo, sempre seguindo o dinheiro.</p>
+   <div class="cta">
+    <button class="btn gold" id="watchLatest">▶ Assistir o mais recente</button>
+    <a class="btn ghost" href="#videos">Ver todos os vídeos</a>
+   </div>
+  </div>
+  <div class="feat" id="feat"><img alt=""><span class="badge">NOVO</span><div class="play"><span></span></div></div>
+ </div>
+
+ <section class="list" id="videos"><div class="wrap">
+  <div class="listhead">
+   <h2>Todos os vídeos</h2>
+   <div class="filters" id="filters"></div>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="next" id="next" hidden><span class="dot"></span><span id="nextTxt"></span></div>
+ </div></section>
+
+ <section class="about"><div class="wrap">
+  <div><h4>Empresas</h4><p>Como marcas gigantes começaram, quanto valiam e quem ficou com o dinheiro.</p></div>
+  <div><h4>Brasil</h4><p>Planos econômicos, empresários e episódios que mexeram no bolso do país.</p></div>
+  <div><h4>Mundo</h4><p>Curiosidades globais com números de verdade e fontes citadas.</p></div>
+ </div></section>
+</main>
+
+<footer><div class="wrap">
+ <span>© <span id="yr"></span> Fatos de Fortuna · @fatosdefortuna</span>
+ <span>Novos vídeos toda semana.</span>
+</div></footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+ <button class="close" id="close" aria-label="Fechar">×</button>
+ <div class="mbox">
+  <video id="player" controls playsinline preload="none"></video>
+  <div class="minfo"><div class="kicker" id="mtag"></div><h3 id="mtitle"></h3><p id="mdesc"></p><div class="mlinks" id="mlinks"></div></div>
+ </div>
+</div>
+
+<script>
+const ALL = [{"slug": "01-coca-cola", "titulo": "Coca-Cola: de US$ 2.300 a US$ 300 bilhões", "resumo": "Um farmacêutico de Atlanta criou a bebida. Quem ficou rico foi quem soube vender.", "tema": "Empresas", "publicado": "2026-11-25T18:07:00-03:00", "duracao": 54, "video": "https://static.metricool.com/planner/202611/8366136-file-2078495729917264432.mp4", "links": {"instagram": "https://www.instagram.com/reel/DgLdb71hDR_/", "tiktok": "https://www.tiktok.com/@fatosdefortuna/video/7712219126059797781", "facebook": "https://facebook.com/reel/1138610288890586"}}, {"slug": "02-plano-collor", "titulo": "O dia em que o governo travou seu dinheiro", "resumo": "16 de março de 1990: tudo acima de NCz$ 50 mil ficou preso por 18 meses.", "tema": "Brasil", "publicado": "2026-11-25T21:15:00-03:00", "duracao": 60, "video": "https://static.metricool.com/planner/202611/8366136-file-2007974622263845493.mp4", "links": {"instagram": "https://www.instagram.com/reel/DgLy8w-hA9U/", "tiktok": "https://www.tiktok.com/@fatosdefortuna/video/7712267532098424072", "facebook": "https://facebook.com/reel/1769916827420290"}}, {"slug": "03-fordlandia", "titulo": "A cidade de US$ 20 milhões que Ford perdeu na Amazônia", "resumo": "Henry Ford ergueu uma cidade americana no Pará. Em 1945, entregou tudo por US$ 244 mil.", "tema": "Brasil", "publicado": "2026-11-25T22:18:00-03:00", "duracao": 72, "video": "https://static.metricool.com/planner/202611/8366136-file-4911915417056056406.mp4", "links": {"instagram": "https://www.instagram.com/reel/DgL6JiQxgro/", "tiktok": "https://www.tiktok.com/@fatosdefortuna/video/7712283773982739718", "facebook": "https://facebook.com/reel/1166901079203808"}}, {"slug": "04-hailey-rhode", "titulo": "A frase que virou meme e o bilhão por trás dela", "resumo": "A Rhode, de Hailey Bieber, foi vendida por até US$ 1 bilhão. E a conta fecha.", "tema": "Empresas", "publicado": "2026-11-25T22:52:00-03:00", "duracao": 70, "video": "https://static.metricool.com/planner/202611/8366136-file-11224079783219146252.mp4", "links": {"instagram": "https://www.instagram.com/reel/DgL-IiJBGig/", "tiktok": "https://www.tiktok.com/@fatosdefortuna/video/7712292645342629126", "facebook": "https://facebook.com/reel/1572900498229923"}}, {"slug": "05-eike-batista", "titulo": "Eike Batista: de US$ 30 bilhões a patrimônio negativo", "resumo": "De 7º mais rico do mundo a patrimônio negativo em menos de 2 anos.", "tema": "Brasil", "publicado": "2026-11-26T10:00:00-03:00", "duracao": 74, "video": "https://static.metricool.com/planner/202611/8366136-file-7565120787129132205.mp4", "links": {"instagram": "https://www.instagram.com/reel/DgNSFm-BOAM/", "tiktok": "https://www.tiktok.com/@fatosdefortuna/video/7712465896496778516", "facebook": "https://facebook.com/reel/1031466762577280"}}, {"slug": "07-nintendo", "titulo": "Nintendo: antes do Mario, táxi, arroz e motel", "resumo": "Mais de 135 anos de história, de loja de cartas a gigante dos games.", "tema": "Empresas", "publicado": "2026-11-26T18:00:00-03:00", "duracao": 75, "video": "https://static.metricool.com/planner/202611/8366136-file-13136940593801781974.mp4", "links": {}}, {"slug": "06-black-friday", "titulo": "De onde veio o nome Black Friday?", "resumo": "Do caos nas ruas da Filadélfia a US$ 11,8 bilhões gastos online num só dia.", "tema": "Mundo", "publicado": "2026-11-27T10:00:00-03:00", "duracao": 70, "video": "https://static.metricool.com/planner/202611/8366136-file-14735225855400922286.mp4", "links": {}}];
+const PROFILES = {instagram:"https://www.instagram.com/fatosdefortuna/",tiktok:"https://www.tiktok.com/@fatosdefortuna",youtube:"https://www.youtube.com/@fatosdefortuna"};
+const ICONS = {
+ instagram:'<svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.2 4.4 2.6 6.8 7 7 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 100 12.4 6.2 6.2 0 000-12.4zM12 16a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.4 1.4 0 100 2.9 1.4 1.4 0 000-2.9z"/></svg>',
+ tiktok:'<svg viewBox="0 0 24 24"><path d="M19.6 6.7a4.8 4.8 0 01-3.8-4.2V2h-3.4v13.7a2.9 2.9 0 01-5.2 1.7 2.9 2.9 0 013.2-4.5V9.4a6.3 6.3 0 00-5.4 10.7 6.3 6.3 0 0010.8-4.4V8.7a8.2 8.2 0 004.8 1.5V6.8a4.8 4.8 0 01-1-.1z"/></svg>',
+ facebook:'<svg viewBox="0 0 24 24"><path d="M24 12a12 12 0 10-13.9 11.9v-8.4H7.1V12h3V9.4c0-3 1.8-4.7 4.6-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0024 12z"/></svg>',
+ youtube:'<svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 00-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 00.5 6.2 31 31 0 000 12a31 31 0 00.5 5.8 3 3 0 002.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 002.1-2.1A31 31 0 0024 12a31 31 0 00-.5-5.8zM9.6 15.6V8.4l6.3 3.6-6.3 3.6z"/></svg>'
+};
+const NAMES = {instagram:"Instagram",tiktok:"TikTok",facebook:"Facebook",youtube:"YouTube"};
+const now = new Date();
+const live = ALL.filter(v => new Date(v.publicado) <= now).sort((a,b)=>new Date(b.publicado)-new Date(a.publicado));
+const upcoming = ALL.filter(v => new Date(v.publicado) > now).sort((a,b)=>new Date(a.publicado)-new Date(b.publicado));
+const fmt = d => new Date(d).toLocaleDateString("pt-BR",{day:"2-digit",month:"short",year:"numeric",timeZone:"America/Sao_Paulo"}).replace(".","");
+const mmss = s => Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
+const $ = id => document.getElementById(id);
+
+$("nav").innerHTML = ["instagram","tiktok"].map(k=>`<a class="soc" href="${PROFILES[k]}" target="_blank" rel="noopener" aria-label="${NAMES[k]}">${ICONS[k]}</a>`).join("");
+$("yr").textContent = now.getFullYear();
+
+const latest = live[0];
+if (latest){ $("feat").querySelector("img").src = `/capas/${latest.slug}.jpg`; $("feat").onclick = () => open(latest); $("watchLatest").onclick = () => open(latest); }
+
+const temas = ["Todos", ...new Set(live.map(v=>v.tema))];
+let filtro = "Todos";
+function renderFilters(){ $("filters").innerHTML = temas.map(t=>`<button class="${t===filtro?"on":""}" data-t="${t}">${t}</button>`).join(""); }
+$("filters").onclick = e => { const t=e.target.dataset.t; if(!t) return; filtro=t; renderFilters(); renderGrid(); };
+function renderGrid(){
+ const list = live.filter(v => filtro==="Todos" || v.tema===filtro);
+ $("grid").innerHTML = list.map(v=>`<article class="card" data-s="${v.slug}">
+  <div class="thumb"><img loading="lazy" src="/capas/${v.slug}.jpg" alt="${v.titulo}"><div class="play"><span></span></div><span class="dur">${mmss(v.duracao)}</span></div>
+  <div class="meta"><div class="tag">${v.tema}</div><h3>${v.titulo}</h3><time>${fmt(v.publicado)}</time></div></article>`).join("");
+}
+$("grid").onclick = e => { const c=e.target.closest(".card"); if(c) open(live.find(v=>v.slug===c.dataset.s)); };
+renderFilters(); renderGrid();
+if (upcoming.length){ const n=upcoming[0]; const d=new Date(n.publicado);
+ $("nextTxt").innerHTML = `<b>Próximo vídeo:</b> ${d.toLocaleDateString("pt-BR",{weekday:"long",day:"2-digit",month:"long",timeZone:"America/Sao_Paulo"})} às ${d.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit",timeZone:"America/Sao_Paulo"})}. Siga para não perder.`; $("next").hidden=false; }
+
+function open(v){
+ $("player").poster = `/capas/${v.slug}.jpg`; $("player").src = v.video;
+ $("mtag").textContent = v.tema+" · "+fmt(v.publicado); $("mtitle").textContent = v.titulo; $("mdesc").textContent = v.resumo;
+ const ls = Object.keys(v.links||{}).length ? v.links : {instagram:PROFILES.instagram,tiktok:PROFILES.tiktok};
+ $("mlinks").innerHTML = Object.entries(ls).map(([k,u])=>`<a href="${u}" target="_blank" rel="noopener">${ICONS[k]}<span>Ver no ${NAMES[k]}</span></a>`).join("");
+ $("modal").classList.add("open"); document.body.style.overflow="hidden";
+ $("player").play().catch(()=>{});
+ history.replaceState(null,"","#"+v.slug);
+}
+function close(){ $("player").pause(); $("player").removeAttribute("src"); $("player").load(); $("modal").classList.remove("open"); document.body.style.overflow=""; history.replaceState(null,""," "); }
+$("close").onclick = close; $("modal").onclick = e => { if(e.target.id==="modal") close(); };
+addEventListener("keydown", e => { if(e.key==="Escape") close(); });
+const h = location.hash.slice(1); const hv = live.find(v=>v.slug===h); if (hv) open(hv);
+</script>
+</body>
+</html>
