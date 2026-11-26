@@ -77,7 +77,11 @@
   "publicado": "2026-11-26T18:00:00-03:00",
   "duracao": 75,
   "video": "/v/07-nintendo.mp4",
-  "links": {}
+  "links": {
+   "instagram": "https://www.instagram.com/reel/DgOIZUTtITg/",
+   "tiktok": "https://www.tiktok.com/@fatosdefortuna/video/7712589231847116052",
+   "facebook": "https://facebook.com/reel/1743331590543131"
+  }
  },
  {
   "slug": "06-black-friday",
