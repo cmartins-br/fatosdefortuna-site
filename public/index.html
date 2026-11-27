@@ -177,7 +177,7 @@ const upcoming = ALL.filter(v => new Date(v.publicado) > now).sort((a,b)=>new Da
 const fmt = d => new Date(d).toLocaleDateString("pt-BR",{day:"2-digit",month:"short",year:"numeric",timeZone:"America/Sao_Paulo"}).replace(".","");
 const mmss = s => Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
 const $ = id => document.getElementById(id);
-const yt = v => v.youtube && !v.video;
+const yt = v => !!(v.youtube && !v.video);
 const capa = v => v.capa || (yt(v) ? `https://i.ytimg.com/vi/${v.youtube}/hqdefault.jpg` : `/capas/${v.slug}.jpg`);
 
 $("nav").innerHTML = ["instagram","tiktok","facebook","youtube"].map(k=>`<a class="soc" href="${PROFILES[k]}" target="_blank" rel="noopener" aria-label="${NAMES[k]}">${ICONS[k]}</a>`).join("");
