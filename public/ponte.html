@@ -1,8 +1,9 @@
 <!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><title>ponte</title>
 <script>
-// Ponte para o YouTube Studio: entrega arquivos deste site (mesma origem) para a página do Studio.
+// Ponte para o YouTube Studio e o Facebook: entrega arquivos deste site (mesma origem) para a página do Studio.
 addEventListener('message', async (e) => {
-  if (e.origin !== 'https://studio.youtube.com') return;
+  const ok = ['https://studio.youtube.com', 'https://www.facebook.com', 'https://business.facebook.com'];
+  if (!ok.includes(e.origin)) return;
   const { pedir, id } = e.data || {};
   if (typeof pedir !== 'string' || !pedir.startsWith('/')) return;
   try {
