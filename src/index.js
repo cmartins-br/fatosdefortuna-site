@@ -9,6 +9,7 @@ export default {
 
     if (url.pathname.startsWith("/v/")) return serveVideo(request, env, url.pathname.slice(3));
     if (url.pathname === "/sitemap.xml") return sitemap(env, url);
+    if (url.pathname === "/") return home(env, url);
     const m = url.pathname.match(/^\/video\/([a-z0-9-]+)\/?$/);
     if (m) return videoPage(env, url, m[1]);
 
@@ -77,6 +78,23 @@ async function sitemap(env, url) {
 ${items}
 </urlset>`;
   return new Response(xml, { headers: { "content-type": "application/xml; charset=utf-8", "cache-control": "public, max-age=600" } });
+}
+
+// Página inicial: já entrega a lista de vídeos e a capa do destaque no HTML (carrega mais rápido).
+async function home(env, url) {
+  const [page, all] = await Promise.all([env.ASSETS.fetch(new URL("/", url)), env.ASSETS.fetch(new URL("/videos.json", url)).then(r => r.ok ? r.json() : null)]);
+  if (!all) return page;
+  const v = (await publicados(env, url))[0];
+  const img = v ? (v.capa || (v.youtube && !v.video ? capa(v, url.origin) : `/capas/${v.slug}.webp`)) : null;
+  const rw = new HTMLRewriter()
+    .on("head", { element(e) {
+      e.append(`<script>window.__V=${JSON.stringify(all).replace(/</g, "\\u003c")}</script>`, { html: true });
+      if (img) e.append(`<link rel="preload" as="image" href="${esc(img)}" fetchpriority="high">`, { html: true });
+    } });
+  if (img) rw.on("#feat img", { element(e) { e.setAttribute("src", img); } });
+  const h = new Headers(page.headers); h.set("content-type", "text/html; charset=utf-8"); h.set("cache-control", "public, max-age=0, must-revalidate");
+  h.delete("content-length"); h.delete("etag");
+  return rw.transform(new Response(page.body, { status: 200, headers: h }));
 }
 
 // Página própria de cada vídeo (/video/<slug>): a mesma página inicial, com título, descrição e prévia do vídeo.

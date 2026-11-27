@@ -18,9 +18,13 @@
 <meta property="og:image" content="https://fatosdefortuna.com.br/capas/01-coca-cola.jpg">
 <meta name="theme-color" content="#0B1524">
 <link rel="icon" href="/logo.svg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preload" href="/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/playfair.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:'Inter';font-style:normal;font-weight:400 700;font-display:swap;src:url(/fonts/inter.woff2) format('woff2')}
+@font-face{font-family:'Playfair Display';font-style:normal;font-weight:700 900;font-display:swap;src:url(/fonts/playfair.woff2) format('woff2')}
+@font-face{font-family:'Playfair Display';font-style:italic;font-weight:700;font-display:swap;src:url(/fonts/playfair-italic.woff2) format('woff2')}
+</style>
 <style>
 :root{--bg:#0B1524;--bg2:#111E33;--card:#14223A;--ink:#F3E9D2;--muted:#A9B3C4;--gold:#D9A941;--gold2:#F2C14E;--line:rgba(243,233,210,.12)}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -128,7 +132,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
     <a class="btn ghost" href="#videos">Ver todos os vídeos</a>
    </div>
   </div>
-  <div class="feat" id="feat"><img alt=""><span class="badge">NOVO</span><div class="play"><span></span></div></div>
+  <div class="feat" id="feat"><img alt="" width="360" height="640" fetchpriority="high"><span class="badge">NOVO</span><div class="play"><span></span></div></div>
  </div>
 
  <section class="list" id="videos"><div class="wrap">
@@ -162,7 +166,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 </div>
 
 <script type="module">
-const ALL = await fetch("/videos.json",{cache:"no-cache"}).then(r=>r.json()).catch(()=>[]);
+const ALL = window.__V || await fetch("/videos.json",{cache:"no-cache"}).then(r=>r.json()).catch(()=>[]);
 const PROFILES = {instagram:"https://www.instagram.com/fatosdefortuna/",tiktok:"https://www.tiktok.com/@fatosdefortuna",facebook:"https://www.facebook.com/1490295827494510",youtube:"https://www.youtube.com/@fatosdefortuna"};
 const ICONS = {
  instagram:'<svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.2 4.4 2.6 6.8 7 7 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 100 12.4 6.2 6.2 0 000-12.4zM12 16a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.4 1.4 0 100 2.9 1.4 1.4 0 000-2.9z"/></svg>',
@@ -179,12 +183,14 @@ const mmss = s => Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
 const $ = id => document.getElementById(id);
 const yt = v => !!(v.youtube && !v.video);
 const capa = v => v.capa || (yt(v) ? `https://i.ytimg.com/vi/${v.youtube}/hqdefault.jpg` : `/capas/${v.slug}.jpg`);
+const capaWeb = v => v.capa || yt(v) ? capa(v) : `/capas/${v.slug}.webp`;
+addEventListener("error", e => { const i=e.target; if (i.tagName==="IMG" && i.src.endsWith(".webp")) i.src=i.src.replace(/\.webp$/,".jpg"); }, true);
 
 $("nav").innerHTML = ["instagram","tiktok","facebook","youtube"].map(k=>`<a class="soc" href="${PROFILES[k]}" target="_blank" rel="noopener" aria-label="${NAMES[k]}">${ICONS[k]}</a>`).join("");
 $("yr").textContent = now.getFullYear();
 
 const latest = live[0];
-if (latest){ $("feat").querySelector("img").src = capa(latest); $("feat").onclick = () => open(latest); $("watchLatest").onclick = () => open(latest); }
+if (latest){ { const fi=$("feat").querySelector("img"); if (!fi.getAttribute("src")) fi.src = capaWeb(latest); } $("feat").onclick = () => open(latest); $("watchLatest").onclick = () => open(latest); }
 
 const temas = ["Todos", ...new Set(live.map(v=>v.tema))];
 let filtro = "Todos";
@@ -193,7 +199,7 @@ $("filters").onclick = e => { const t=e.target.dataset.t; if(!t) return; filtro=
 function renderGrid(){
  const list = live.filter(v => filtro==="Todos" || v.tema===filtro);
  $("grid").innerHTML = list.map(v=>`<article class="card" data-s="${v.slug}">
-  <div class="thumb${yt(v)?" wide":""}"><img loading="lazy" src="${capa(v)}" alt="${v.titulo}"><div class="play"><span></span></div><span class="dur">${mmss(v.duracao)}</span></div>
+  <div class="thumb${yt(v)?" wide":""}"><img loading="lazy" width="360" height="640" src="${capaWeb(v)}" alt="${v.titulo}"><div class="play"><span></span></div><span class="dur">${mmss(v.duracao)}</span></div>
   <div class="meta"><div class="tag">${v.tema}</div><h3>${v.titulo}</h3><time>${fmt(v.publicado)}</time></div></article>`).join("");
 }
 $("grid").onclick = e => { const c=e.target.closest(".card"); if(c) open(live.find(v=>v.slug===c.dataset.s)); };
