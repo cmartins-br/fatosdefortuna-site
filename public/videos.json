@@ -91,7 +91,10 @@
     "publicado": "2026-11-27T10:00:00-03:00",
     "duracao": 70,
     "video": "/v/06-black-friday.mp4",
-    "links": {}
+    "links": {
+      "tiktok": "https://www.tiktok.com/@fatosdefortuna/video/7712836328496319796",
+      "facebook": "https://facebook.com/reel/1957661978952297"
+    }
   },
   {
     "slug": "09-blockbuster",
