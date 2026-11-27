@@ -174,7 +174,7 @@ const fmt = d => new Date(d).toLocaleDateString("pt-BR",{day:"2-digit",month:"sh
 const mmss = s => Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
 const $ = id => document.getElementById(id);
 
-$("nav").innerHTML = ["instagram","tiktok","facebook"].map(k=>`<a class="soc" href="${PROFILES[k]}" target="_blank" rel="noopener" aria-label="${NAMES[k]}">${ICONS[k]}</a>`).join("");
+$("nav").innerHTML = ["instagram","tiktok","facebook","youtube"].map(k=>`<a class="soc" href="${PROFILES[k]}" target="_blank" rel="noopener" aria-label="${NAMES[k]}">${ICONS[k]}</a>`).join("");
 $("yr").textContent = now.getFullYear();
 
 const latest = live[0];
@@ -198,7 +198,7 @@ if (upcoming.length){ const n=upcoming[0]; const d=new Date(n.publicado);
 function open(v){
  $("player").poster = `/capas/${v.slug}.jpg`; $("player").src = v.video;
  $("mtag").textContent = v.tema+" · "+fmt(v.publicado); $("mtitle").textContent = v.titulo; $("mdesc").textContent = v.resumo;
- const ls = Object.keys(v.links||{}).length ? v.links : {instagram:PROFILES.instagram,tiktok:PROFILES.tiktok,facebook:PROFILES.facebook};
+ const ls = Object.keys(v.links||{}).length ? v.links : {instagram:PROFILES.instagram,tiktok:PROFILES.tiktok,facebook:PROFILES.facebook,youtube:PROFILES.youtube};
  $("mlinks").innerHTML = Object.entries(ls).map(([k,u])=>`<a href="${u}" target="_blank" rel="noopener">${ICONS[k]}<span>Ver no ${NAMES[k]}</span></a>`).join("");
  try{ gtag("event","assistir_video",{video_slug:v.slug,video_titulo:v.titulo}); }catch(e){}
  $("modal").classList.add("open"); document.body.style.overflow="hidden";
