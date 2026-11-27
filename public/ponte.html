@@ -1,0 +1,16 @@
+<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><title>ponte</title>
+<script>
+// Ponte para o YouTube Studio: entrega arquivos deste site (mesma origem) para a página do Studio.
+addEventListener('message', async (e) => {
+  if (e.origin !== 'https://studio.youtube.com') return;
+  const { pedir, id } = e.data || {};
+  if (typeof pedir !== 'string' || !pedir.startsWith('/')) return;
+  try {
+    const r = await fetch(pedir);
+    const blob = await r.blob();
+    e.source.postMessage({ __fdf: 1, id, ok: r.ok, status: r.status, blob }, e.origin);
+  } catch (err) {
+    e.source.postMessage({ __fdf: 1, id, ok: false, erro: String(err) }, e.origin);
+  }
+});
+</script>
