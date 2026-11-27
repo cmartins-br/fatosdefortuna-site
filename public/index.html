@@ -15,7 +15,7 @@
 <meta property="og:title" content="Fatos de Fortuna">
 <meta property="og:description" content="Histórias contadas pelo lado do dinheiro.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="/capas/01-coca-cola.jpg">
+<meta property="og:image" content="https://fatosdefortuna.com.br/capas/01-coca-cola.jpg">
 <meta name="theme-color" content="#0B1524">
 <link rel="icon" href="/logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -85,6 +85,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 .modal{position:fixed;inset:0;z-index:50;background:rgba(5,10,18,.92);display:none;align-items:center;justify-content:center;padding:16px}
 .modal.open{display:flex}
 .mbox{display:flex;gap:28px;align-items:center;max-width:860px;width:100%}
+.mbox iframe{display:none;width:min(92vw,1100px);aspect-ratio:16/9;border:0;border-radius:18px;background:#000}
+.mbox.yt{flex-direction:column;max-width:1100px}.mbox.yt video{display:none}.mbox.yt iframe{display:block}
+.thumb.wide{aspect-ratio:16/9}
 .mbox video{height:min(82vh,760px);aspect-ratio:9/16;max-width:100%;border-radius:18px;background:#000;box-shadow:0 0 0 1px var(--line)}
 .minfo{flex:1;min-width:0}
 .minfo h3{font-family:"Playfair Display",serif;font-size:28px;line-height:1.15;margin:8px 0 10px}
@@ -99,7 +102,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
  .hero p{margin:0 auto}.cta{justify-content:center}
  .about .wrap{grid-template-columns:1fr}
  .mbox{flex-direction:column;gap:14px}
- .mbox video{height:auto;width:min(100%,calc(70vh*9/16))}
+.mbox video{height:auto;width:min(100%,calc(70vh*9/16))}
  .minfo{text-align:center}.minfo h3{font-size:20px}.minfo p{display:none}
  .mlinks{flex-direction:row;justify-content:center;margin-top:12px}
  .mlinks a span{display:none}
@@ -153,6 +156,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
  <button class="close" id="close" aria-label="Fechar">×</button>
  <div class="mbox">
   <video id="player" controls playsinline preload="none"></video>
+  <iframe id="yt" title="Vídeo no YouTube" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
   <div class="minfo"><div class="kicker" id="mtag"></div><h3 id="mtitle"></h3><p id="mdesc"></p><div class="mlinks" id="mlinks"></div></div>
  </div>
 </div>
@@ -173,12 +177,14 @@ const upcoming = ALL.filter(v => new Date(v.publicado) > now).sort((a,b)=>new Da
 const fmt = d => new Date(d).toLocaleDateString("pt-BR",{day:"2-digit",month:"short",year:"numeric",timeZone:"America/Sao_Paulo"}).replace(".","");
 const mmss = s => Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
 const $ = id => document.getElementById(id);
+const yt = v => v.youtube && !v.video;
+const capa = v => v.capa || (yt(v) ? `https://i.ytimg.com/vi/${v.youtube}/hqdefault.jpg` : `/capas/${v.slug}.jpg`);
 
 $("nav").innerHTML = ["instagram","tiktok","facebook","youtube"].map(k=>`<a class="soc" href="${PROFILES[k]}" target="_blank" rel="noopener" aria-label="${NAMES[k]}">${ICONS[k]}</a>`).join("");
 $("yr").textContent = now.getFullYear();
 
 const latest = live[0];
-if (latest){ $("feat").querySelector("img").src = `/capas/${latest.slug}.jpg`; $("feat").onclick = () => open(latest); $("watchLatest").onclick = () => open(latest); }
+if (latest){ $("feat").querySelector("img").src = capa(latest); $("feat").onclick = () => open(latest); $("watchLatest").onclick = () => open(latest); }
 
 const temas = ["Todos", ...new Set(live.map(v=>v.tema))];
 let filtro = "Todos";
@@ -187,7 +193,7 @@ $("filters").onclick = e => { const t=e.target.dataset.t; if(!t) return; filtro=
 function renderGrid(){
  const list = live.filter(v => filtro==="Todos" || v.tema===filtro);
  $("grid").innerHTML = list.map(v=>`<article class="card" data-s="${v.slug}">
-  <div class="thumb"><img loading="lazy" src="/capas/${v.slug}.jpg" alt="${v.titulo}"><div class="play"><span></span></div><span class="dur">${mmss(v.duracao)}</span></div>
+  <div class="thumb${yt(v)?" wide":""}"><img loading="lazy" src="${capa(v)}" alt="${v.titulo}"><div class="play"><span></span></div><span class="dur">${mmss(v.duracao)}</span></div>
   <div class="meta"><div class="tag">${v.tema}</div><h3>${v.titulo}</h3><time>${fmt(v.publicado)}</time></div></article>`).join("");
 }
 $("grid").onclick = e => { const c=e.target.closest(".card"); if(c) open(live.find(v=>v.slug===c.dataset.s)); };
@@ -196,19 +202,21 @@ if (upcoming.length){ const n=upcoming[0]; const d=new Date(n.publicado);
  $("nextTxt").innerHTML = `<b>Próximo vídeo:</b> ${d.toLocaleDateString("pt-BR",{weekday:"long",day:"2-digit",month:"long",timeZone:"America/Sao_Paulo"})} às ${d.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit",timeZone:"America/Sao_Paulo"})}. Siga para não perder.`; $("next").hidden=false; }
 
 function open(v){
- $("player").poster = `/capas/${v.slug}.jpg`; $("player").src = v.video;
+ const box = document.querySelector(".mbox"); box.classList.toggle("yt", yt(v));
+ if (yt(v)) { $("yt").src = `https://www.youtube-nocookie.com/embed/${v.youtube}?autoplay=1&rel=0`; }
+ else { $("player").poster = capa(v); $("player").src = v.video; }
  $("mtag").textContent = v.tema+" · "+fmt(v.publicado); $("mtitle").textContent = v.titulo; $("mdesc").textContent = v.resumo;
  const ls = Object.keys(v.links||{}).length ? v.links : {instagram:PROFILES.instagram,tiktok:PROFILES.tiktok,facebook:PROFILES.facebook,youtube:PROFILES.youtube};
  $("mlinks").innerHTML = Object.entries(ls).map(([k,u])=>`<a href="${u}" target="_blank" rel="noopener">${ICONS[k]}<span>Ver no ${NAMES[k]}</span></a>`).join("");
  try{ gtag("event","assistir_video",{video_slug:v.slug,video_titulo:v.titulo}); }catch(e){}
  $("modal").classList.add("open"); document.body.style.overflow="hidden";
- $("player").play().catch(()=>{});
- history.replaceState(null,"","#"+v.slug);
+ if (!yt(v)) $("player").play().catch(()=>{});
+ history.replaceState(null,"","/video/"+v.slug);
 }
-function close(){ $("player").pause(); $("player").removeAttribute("src"); $("player").load(); $("modal").classList.remove("open"); document.body.style.overflow=""; history.replaceState(null,""," "); }
+function close(){ $("player").pause(); $("player").removeAttribute("src"); $("player").load(); $("yt").removeAttribute("src"); $("modal").classList.remove("open"); document.body.style.overflow=""; history.replaceState(null,"","/"); }
 $("close").onclick = close; $("modal").onclick = e => { if(e.target.id==="modal") close(); };
 addEventListener("keydown", e => { if(e.key==="Escape") close(); });
-const h = location.hash.slice(1); const hv = live.find(v=>v.slug===h); if (hv) open(hv);
+const h = (location.pathname.match(/^\/video\/([a-z0-9-]+)/)||[])[1] || location.hash.slice(1); const hv = live.find(v=>v.slug===h); if (hv) open(hv);
 </script>
 </body>
 </html>

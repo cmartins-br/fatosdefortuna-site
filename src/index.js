@@ -8,6 +8,9 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname.startsWith("/v/")) return serveVideo(request, env, url.pathname.slice(3));
+    if (url.pathname === "/sitemap.xml") return sitemap(env, url);
+    const m = url.pathname.match(/^\/video\/([a-z0-9-]+)\/?$/);
+    if (m) return videoPage(env, url, m[1]);
 
     if (url.pathname === "/__import" && request.method === "POST") {
       const { key, src } = await request.json().catch(() => ({}));
@@ -43,6 +46,59 @@ async function serveVideo(request, env, key) {
   }
   headers.set("content-length", String(obj.size));
   return new Response(obj.body, { headers });
+}
+
+// Lista de vídeos já publicados (data de publicação no passado), mais novo primeiro.
+async function publicados(env, url) {
+  const r = await env.ASSETS.fetch(new URL("/videos.json", url));
+  const all = r.ok ? await r.json() : [];
+  const now = Date.now();
+  return all.filter(v => new Date(v.publicado).getTime() <= now).sort((a, b) => new Date(b.publicado) - new Date(a.publicado));
+}
+
+const esc = s => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const capa = (v, origin) => v.capa ? new URL(v.capa, origin).href : v.youtube && !v.video ? `https://i.ytimg.com/vi/${v.youtube}/hqdefault.jpg` : `${origin}/capas/${v.slug}.jpg`;
+
+// Sitemap gerado na hora a partir do videos.json: entra sozinho cada vídeo que chega na data de publicação.
+async function sitemap(env, url) {
+  const o = url.origin.replace("://www.", "://");
+  const vids = await publicados(env, url);
+  const last = vids[0] ? new Date(vids[0].publicado).toISOString() : new Date().toISOString();
+  const items = vids.map(v => {
+    const media = v.youtube && !v.video
+      ? `<video:player_loc>https://www.youtube.com/embed/${esc(v.youtube)}</video:player_loc>`
+      : `<video:content_loc>${o}${esc(v.video)}</video:content_loc>`;
+    return `<url><loc>${o}/video/${v.slug}</loc><lastmod>${new Date(v.publicado).toISOString()}</lastmod>
+<video:video><video:thumbnail_loc>${esc(capa(v, o))}</video:thumbnail_loc><video:title>${esc(v.titulo)}</video:title><video:description>${esc(v.resumo)}</video:description>${media}${v.duracao ? `<video:duration>${v.duracao}</video:duration>` : ""}<video:publication_date>${esc(v.publicado)}</video:publication_date><video:family_friendly>yes</video:family_friendly></video:video></url>`;
+  }).join("\n");
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url><loc>${o}/</loc><lastmod>${last}</lastmod></url>
+${items}
+</urlset>`;
+  return new Response(xml, { headers: { "content-type": "application/xml; charset=utf-8", "cache-control": "public, max-age=600" } });
+}
+
+// Página própria de cada vídeo (/video/<slug>): a mesma página inicial, com título, descrição e prévia do vídeo.
+async function videoPage(env, url, slug) {
+  const o = url.origin;
+  const v = (await publicados(env, url)).find(x => x.slug === slug);
+  if (!v) return Response.redirect(new URL("/", url).toString(), 302);
+  const page = await env.ASSETS.fetch(new URL("/", url));
+  const img = capa(v, o), link = `${o.replace("://www.", "://")}/video/${slug}`;
+  const ld = { "@context": "https://schema.org", "@type": "VideoObject", name: v.titulo, description: v.resumo, thumbnailUrl: img, uploadDate: v.publicado,
+    ...(v.duracao ? { duration: `PT${Math.floor(v.duracao / 60)}M${v.duracao % 60}S` } : {}),
+    ...(v.youtube && !v.video ? { embedUrl: `https://www.youtube.com/embed/${v.youtube}` } : { contentUrl: o + v.video }) };
+  const setContent = val => ({ element(e) { e.setAttribute("content", val); } });
+  return new HTMLRewriter()
+    .on("title", { element(e) { e.setInnerContent(`${v.titulo} | Fatos de Fortuna`); } })
+    .on('meta[name="description"]', setContent(v.resumo))
+    .on('meta[property="og:title"]', setContent(v.titulo))
+    .on('meta[property="og:description"]', setContent(v.resumo))
+    .on('meta[property="og:type"]', setContent("video.other"))
+    .on('meta[property="og:image"]', setContent(img))
+    .on("head", { element(e) { e.append(`<link rel="canonical" href="${link}"><meta property="og:url" content="${link}"><script type="application/ld+json">${JSON.stringify(ld).replace(/</g, "\\u003c")}</script>`, { html: true }); } })
+    .transform(new Response(page.body, { headers: { "content-type": "text/html; charset=utf-8", "cache-control": "public, max-age=300" } }));
 }
 
 const json = (d, status = 200) => new Response(JSON.stringify(d), { status, headers: { "content-type": "application/json" } });
