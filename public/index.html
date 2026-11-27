@@ -1,6 +1,13 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
+<!-- Google tag (Analytics: propriedade "Fatos de Fortuna - Site") -->
+<script async src="https://www.googletagmanager.com/gtm.js?id=GTM-P3VQVF4C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Fatos de Fortuna | Histórias contadas pelo lado do dinheiro</title>
@@ -193,6 +200,7 @@ function open(v){
  $("mtag").textContent = v.tema+" · "+fmt(v.publicado); $("mtitle").textContent = v.titulo; $("mdesc").textContent = v.resumo;
  const ls = Object.keys(v.links||{}).length ? v.links : {instagram:PROFILES.instagram,tiktok:PROFILES.tiktok,facebook:PROFILES.facebook};
  $("mlinks").innerHTML = Object.entries(ls).map(([k,u])=>`<a href="${u}" target="_blank" rel="noopener">${ICONS[k]}<span>Ver no ${NAMES[k]}</span></a>`).join("");
+ try{ gtag("event","assistir_video",{video_slug:v.slug,video_titulo:v.titulo}); }catch(e){}
  $("modal").classList.add("open"); document.body.style.overflow="hidden";
  $("player").play().catch(()=>{});
  history.replaceState(null,"","#"+v.slug);
