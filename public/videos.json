@@ -1,96 +1,126 @@
 [
- {
-  "slug": "01-coca-cola",
-  "titulo": "Coca-Cola: de US$ 2.300 a US$ 300 bilhões",
-  "resumo": "Um farmacêutico de Atlanta criou a bebida. Quem ficou rico foi quem soube vender.",
-  "tema": "Empresas",
-  "publicado": "2026-11-25T18:07:00-03:00",
-  "duracao": 54,
-  "video": "/v/01-coca-cola.mp4",
-  "links": {
-   "instagram": "https://www.instagram.com/reel/DgLdb71hDR_/",
-   "tiktok": "https://www.tiktok.com/@fatosdefortuna/video/7712219126059797781",
-   "facebook": "https://facebook.com/reel/1138610288890586"
+  {
+    "slug": "01-coca-cola",
+    "titulo": "Coca-Cola: de US$ 2.300 a US$ 300 bilhões",
+    "resumo": "Um farmacêutico de Atlanta criou a bebida. Quem ficou rico foi quem soube vender.",
+    "tema": "Empresas",
+    "publicado": "2026-11-25T18:07:00-03:00",
+    "duracao": 54,
+    "video": "/v/01-coca-cola.mp4",
+    "links": {
+      "instagram": "https://www.instagram.com/reel/DgLdb71hDR_/",
+      "tiktok": "https://www.tiktok.com/@fatosdefortuna/video/7712219126059797781",
+      "facebook": "https://facebook.com/reel/1138610288890586"
+    }
+  },
+  {
+    "slug": "02-plano-collor",
+    "titulo": "O dia em que o governo travou seu dinheiro",
+    "resumo": "16 de março de 1990: tudo acima de NCz$ 50 mil ficou preso por 18 meses.",
+    "tema": "Brasil",
+    "publicado": "2026-11-25T21:15:00-03:00",
+    "duracao": 60,
+    "video": "/v/02-plano-collor.mp4",
+    "links": {
+      "instagram": "https://www.instagram.com/reel/DgLy8w-hA9U/",
+      "tiktok": "https://www.tiktok.com/@fatosdefortuna/video/7712267532098424072",
+      "facebook": "https://facebook.com/reel/1769916827420290"
+    }
+  },
+  {
+    "slug": "03-fordlandia",
+    "titulo": "A cidade de US$ 20 milhões que Ford perdeu na Amazônia",
+    "resumo": "Henry Ford ergueu uma cidade americana no Pará. Em 1945, entregou tudo por US$ 244 mil.",
+    "tema": "Brasil",
+    "publicado": "2026-11-25T22:18:00-03:00",
+    "duracao": 72,
+    "video": "/v/03-fordlandia.mp4",
+    "links": {
+      "instagram": "https://www.instagram.com/reel/DgL6JiQxgro/",
+      "tiktok": "https://www.tiktok.com/@fatosdefortuna/video/7712283773982739718",
+      "facebook": "https://facebook.com/reel/1166901079203808"
+    }
+  },
+  {
+    "slug": "04-hailey-rhode",
+    "titulo": "A frase que virou meme e o bilhão por trás dela",
+    "resumo": "A Rhode, de Hailey Bieber, foi vendida por até US$ 1 bilhão. E a conta fecha.",
+    "tema": "Empresas",
+    "publicado": "2026-11-25T22:52:00-03:00",
+    "duracao": 70,
+    "video": "/v/04-hailey-rhode.mp4",
+    "links": {
+      "instagram": "https://www.instagram.com/reel/DgL-IiJBGig/",
+      "tiktok": "https://www.tiktok.com/@fatosdefortuna/video/7712292645342629126",
+      "facebook": "https://facebook.com/reel/1572900498229923"
+    }
+  },
+  {
+    "slug": "05-eike-batista",
+    "titulo": "Eike Batista: de US$ 30 bilhões a patrimônio negativo",
+    "resumo": "De 7º mais rico do mundo a patrimônio negativo em menos de 2 anos.",
+    "tema": "Brasil",
+    "publicado": "2026-11-26T10:00:00-03:00",
+    "duracao": 74,
+    "video": "/v/05-eike-batista.mp4",
+    "links": {
+      "instagram": "https://www.instagram.com/reel/DgNSFm-BOAM/",
+      "tiktok": "https://www.tiktok.com/@fatosdefortuna/video/7712465896496778516",
+      "facebook": "https://facebook.com/reel/1031466762577280"
+    }
+  },
+  {
+    "slug": "07-nintendo",
+    "titulo": "Nintendo: antes do Mario, táxi, arroz e motel",
+    "resumo": "Mais de 135 anos de história, de loja de cartas a gigante dos games.",
+    "tema": "Empresas",
+    "publicado": "2026-11-26T18:00:00-03:00",
+    "duracao": 75,
+    "video": "/v/07-nintendo.mp4",
+    "links": {
+      "instagram": "https://www.instagram.com/reel/DgOIZUTtITg/",
+      "tiktok": "https://www.tiktok.com/@fatosdefortuna/video/7712589231847116052",
+      "facebook": "https://facebook.com/reel/1743331590543131"
+    }
+  },
+  {
+    "slug": "06-black-friday",
+    "titulo": "De onde veio o nome Black Friday?",
+    "resumo": "Do caos nas ruas da Filadélfia a US$ 11,8 bilhões gastos online num só dia.",
+    "tema": "Mundo",
+    "publicado": "2026-11-27T10:00:00-03:00",
+    "duracao": 70,
+    "video": "/v/06-black-friday.mp4",
+    "links": {}
+  },
+  {
+    "slug": "09-blockbuster",
+    "titulo": "A Blockbuster recusou a Netflix por US$ 50 milhões",
+    "resumo": "Em 2000, a rainha das locadoras riu da proposta. Hoje a Netflix vale quase 5 mil vezes aquela oferta.",
+    "tema": "Empresas",
+    "publicado": "2026-11-28T18:00:00-03:00",
+    "duracao": 70,
+    "video": "/v/09-blockbuster.mp4",
+    "links": {}
+  },
+  {
+    "slug": "08-americanas",
+    "titulo": "O rombo de R$ 20 bilhões da Americanas",
+    "resumo": "Em um único dia, uma das maiores varejistas do Brasil perdeu 77% do valor na bolsa.",
+    "tema": "Brasil",
+    "publicado": "2026-11-29T18:00:00-03:00",
+    "duracao": 88,
+    "video": "/v/08-americanas.mp4",
+    "links": {}
+  },
+  {
+    "slug": "11-tulipomania",
+    "titulo": "A bolha das tulipas: mito x realidade",
+    "resumo": "Um bulbo valeu mais de 10 anos de salário de um artesão. Mas a quebradeira foi bem menor do que a lenda.",
+    "tema": "Mundo",
+    "publicado": "2026-11-30T18:00:00-03:00",
+    "duracao": 76,
+    "video": "/v/11-tulipomania.mp4",
+    "links": {}
   }
- },
- {
-  "slug": "02-plano-collor",
-  "titulo": "O dia em que o governo travou seu dinheiro",
-  "resumo": "16 de março de 1990: tudo acima de NCz$ 50 mil ficou preso por 18 meses.",
-  "tema": "Brasil",
-  "publicado": "2026-11-25T21:15:00-03:00",
-  "duracao": 60,
-  "video": "/v/02-plano-collor.mp4",
-  "links": {
-   "instagram": "https://www.instagram.com/reel/DgLy8w-hA9U/",
-   "tiktok": "https://www.tiktok.com/@fatosdefortuna/video/7712267532098424072",
-   "facebook": "https://facebook.com/reel/1769916827420290"
-  }
- },
- {
-  "slug": "03-fordlandia",
-  "titulo": "A cidade de US$ 20 milhões que Ford perdeu na Amazônia",
-  "resumo": "Henry Ford ergueu uma cidade americana no Pará. Em 1945, entregou tudo por US$ 244 mil.",
-  "tema": "Brasil",
-  "publicado": "2026-11-25T22:18:00-03:00",
-  "duracao": 72,
-  "video": "/v/03-fordlandia.mp4",
-  "links": {
-   "instagram": "https://www.instagram.com/reel/DgL6JiQxgro/",
-   "tiktok": "https://www.tiktok.com/@fatosdefortuna/video/7712283773982739718",
-   "facebook": "https://facebook.com/reel/1166901079203808"
-  }
- },
- {
-  "slug": "04-hailey-rhode",
-  "titulo": "A frase que virou meme e o bilhão por trás dela",
-  "resumo": "A Rhode, de Hailey Bieber, foi vendida por até US$ 1 bilhão. E a conta fecha.",
-  "tema": "Empresas",
-  "publicado": "2026-11-25T22:52:00-03:00",
-  "duracao": 70,
-  "video": "/v/04-hailey-rhode.mp4",
-  "links": {
-   "instagram": "https://www.instagram.com/reel/DgL-IiJBGig/",
-   "tiktok": "https://www.tiktok.com/@fatosdefortuna/video/7712292645342629126",
-   "facebook": "https://facebook.com/reel/1572900498229923"
-  }
- },
- {
-  "slug": "05-eike-batista",
-  "titulo": "Eike Batista: de US$ 30 bilhões a patrimônio negativo",
-  "resumo": "De 7º mais rico do mundo a patrimônio negativo em menos de 2 anos.",
-  "tema": "Brasil",
-  "publicado": "2026-11-26T10:00:00-03:00",
-  "duracao": 74,
-  "video": "/v/05-eike-batista.mp4",
-  "links": {
-   "instagram": "https://www.instagram.com/reel/DgNSFm-BOAM/",
-   "tiktok": "https://www.tiktok.com/@fatosdefortuna/video/7712465896496778516",
-   "facebook": "https://facebook.com/reel/1031466762577280"
-  }
- },
- {
-  "slug": "07-nintendo",
-  "titulo": "Nintendo: antes do Mario, táxi, arroz e motel",
-  "resumo": "Mais de 135 anos de história, de loja de cartas a gigante dos games.",
-  "tema": "Empresas",
-  "publicado": "2026-11-26T18:00:00-03:00",
-  "duracao": 75,
-  "video": "/v/07-nintendo.mp4",
-  "links": {
-   "instagram": "https://www.instagram.com/reel/DgOIZUTtITg/",
-   "tiktok": "https://www.tiktok.com/@fatosdefortuna/video/7712589231847116052",
-   "facebook": "https://facebook.com/reel/1743331590543131"
-  }
- },
- {
-  "slug": "06-black-friday",
-  "titulo": "De onde veio o nome Black Friday?",
-  "resumo": "Do caos nas ruas da Filadélfia a US$ 11,8 bilhões gastos online num só dia.",
-  "tema": "Mundo",
-  "publicado": "2026-11-27T10:00:00-03:00",
-  "duracao": 70,
-  "video": "/v/06-black-friday.mp4",
-  "links": {}
- }
 ]
