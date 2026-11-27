@@ -132,5 +132,66 @@
     "duracao": 73,
     "video": "/v/10-havaianas.mp4",
     "links": {}
+  },
+  {
+    "slug": "doc-01-eike-batista",
+    "tipo": "documentario",
+    "titulo": "Eike Batista: de 7º mais rico do mundo a patrimônio negativo",
+    "resumo": "A ascensão e a queda do império X, do maior IPO da Bolsa à recuperação judicial, à prisão e ao que sobrou.",
+    "sinopse": [
+      "Em março de 2012, Eike Batista era o 7º homem mais rico do mundo, com US$ 30 bilhões segundo a Forbes. Dois anos e meio depois, disse que seu patrimônio era negativo.",
+      "O documentário conta a história do império X: o filho do presidente da Vale que fez fortuna com ouro, criou OGX, MMX, MPX, LLX e OSX, fez o maior IPO da Bolsa brasileira até então e viu tudo desabar quando o petróleo prometido não apareceu. Depois vieram a recuperação judicial, a Operação Eficiência, a prisão e o que sobrou das empresas.",
+      "As condenações citadas são de primeira instância e cabem recurso."
+    ],
+    "tema": "Brasil",
+    "publicado": "2026-11-27T15:25:00-03:00",
+    "duracao": 729,
+    "youtube": "FJFt1TV1Yzo",
+    "capa": "/capas/doc-01-eike-batista.jpg",
+    "capitulos": [
+      {
+        "t": 0,
+        "titulo": "A fortuna que virou negativa"
+      },
+      {
+        "t": 37,
+        "titulo": "O filho do homem da Vale"
+      },
+      {
+        "t": 103,
+        "titulo": "O milionário das manchetes"
+      },
+      {
+        "t": 154,
+        "titulo": "O império X"
+      },
+      {
+        "t": 258,
+        "titulo": "O auge"
+      },
+      {
+        "t": 334,
+        "titulo": "O poço que não jorrou"
+      },
+      {
+        "t": 478,
+        "titulo": "O efeito dominó"
+      },
+      {
+        "t": 536,
+        "titulo": "Da capa de revista à cadeia"
+      },
+      {
+        "t": 638,
+        "titulo": "O que sobrou do X"
+      },
+      {
+        "t": 693,
+        "titulo": "A lição"
+      }
+    ],
+    "links": {
+      "youtube": "https://www.youtube.com/watch?v=FJFt1TV1Yzo"
+    }
   }
 ]

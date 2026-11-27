@@ -84,7 +84,7 @@ ${items}
 async function home(env, url) {
   const [page, all] = await Promise.all([env.ASSETS.fetch(new URL("/", url)), env.ASSETS.fetch(new URL("/videos.json", url)).then(r => r.ok ? r.json() : null)]);
   if (!all) return page;
-  const v = (await publicados(env, url))[0];
+  const v = (await publicados(env, url)).find(x => x.tipo !== "documentario"); // destaque do topo é sempre um vídeo curto
   const img = v ? (v.capa || (v.youtube && !v.video ? capa(v, url.origin) : `/capas/${v.slug}.webp`)) : null;
   const rw = new HTMLRewriter()
     .on("head", { element(e) {
@@ -107,6 +107,11 @@ async function videoPage(env, url, slug) {
   const ld = { "@context": "https://schema.org", "@type": "VideoObject", name: v.titulo, description: v.resumo, thumbnailUrl: img, uploadDate: v.publicado,
     ...(v.duracao ? { duration: `PT${Math.floor(v.duracao / 60)}M${v.duracao % 60}S` } : {}),
     ...(v.youtube && !v.video ? { embedUrl: `https://www.youtube.com/embed/${v.youtube}` } : { contentUrl: o + v.video }) };
+  if (v.youtube && Array.isArray(v.capitulos) && v.capitulos.length) {
+    const watch = `https://www.youtube.com/watch?v=${v.youtube}`;
+    ld.hasPart = v.capitulos.map((c, i) => ({ "@type": "Clip", name: c.titulo, startOffset: c.t,
+      ...(v.capitulos[i + 1] ? { endOffset: v.capitulos[i + 1].t } : v.duracao ? { endOffset: v.duracao } : {}), url: `${watch}&t=${c.t}s` }));
+  }
   const setContent = val => ({ element(e) { e.setAttribute("content", val); } });
   return new HTMLRewriter()
     .on("title", { element(e) { e.setInnerContent(`${v.titulo} | Fatos de Fortuna`); } })
