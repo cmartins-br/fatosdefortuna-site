@@ -152,7 +152,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
 
 <script type="module">
 const ALL = await fetch("/videos.json",{cache:"no-cache"}).then(r=>r.json()).catch(()=>[]);
-const PROFILES = {instagram:"https://www.instagram.com/fatosdefortuna/",tiktok:"https://www.tiktok.com/@fatosdefortuna",youtube:"https://www.youtube.com/@fatosdefortuna"};
+const PROFILES = {instagram:"https://www.instagram.com/fatosdefortuna/",tiktok:"https://www.tiktok.com/@fatosdefortuna",facebook:"https://www.facebook.com/1490295827494510",youtube:"https://www.youtube.com/@fatosdefortuna"};
 const ICONS = {
  instagram:'<svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 3.9 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.2 4.4 2.6 6.8 7 7 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 100 12.4 6.2 6.2 0 000-12.4zM12 16a4 4 0 110-8 4 4 0 010 8zm6.4-11.8a1.4 1.4 0 100 2.9 1.4 1.4 0 000-2.9z"/></svg>',
  tiktok:'<svg viewBox="0 0 24 24"><path d="M19.6 6.7a4.8 4.8 0 01-3.8-4.2V2h-3.4v13.7a2.9 2.9 0 01-5.2 1.7 2.9 2.9 0 013.2-4.5V9.4a6.3 6.3 0 00-5.4 10.7 6.3 6.3 0 0010.8-4.4V8.7a8.2 8.2 0 004.8 1.5V6.8a4.8 4.8 0 01-1-.1z"/></svg>',
@@ -167,7 +167,7 @@ const fmt = d => new Date(d).toLocaleDateString("pt-BR",{day:"2-digit",month:"sh
 const mmss = s => Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
 const $ = id => document.getElementById(id);
 
-$("nav").innerHTML = ["instagram","tiktok"].map(k=>`<a class="soc" href="${PROFILES[k]}" target="_blank" rel="noopener" aria-label="${NAMES[k]}">${ICONS[k]}</a>`).join("");
+$("nav").innerHTML = ["instagram","tiktok","facebook"].map(k=>`<a class="soc" href="${PROFILES[k]}" target="_blank" rel="noopener" aria-label="${NAMES[k]}">${ICONS[k]}</a>`).join("");
 $("yr").textContent = now.getFullYear();
 
 const latest = live[0];
@@ -191,7 +191,7 @@ if (upcoming.length){ const n=upcoming[0]; const d=new Date(n.publicado);
 function open(v){
  $("player").poster = `/capas/${v.slug}.jpg`; $("player").src = v.video;
  $("mtag").textContent = v.tema+" · "+fmt(v.publicado); $("mtitle").textContent = v.titulo; $("mdesc").textContent = v.resumo;
- const ls = Object.keys(v.links||{}).length ? v.links : {instagram:PROFILES.instagram,tiktok:PROFILES.tiktok};
+ const ls = Object.keys(v.links||{}).length ? v.links : {instagram:PROFILES.instagram,tiktok:PROFILES.tiktok,facebook:PROFILES.facebook};
  $("mlinks").innerHTML = Object.entries(ls).map(([k,u])=>`<a href="${u}" target="_blank" rel="noopener">${ICONS[k]}<span>Ver no ${NAMES[k]}</span></a>`).join("");
  $("modal").classList.add("open"); document.body.style.overflow="hidden";
  $("player").play().catch(()=>{});
